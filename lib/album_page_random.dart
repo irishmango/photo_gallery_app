@@ -9,7 +9,7 @@ class AlbumPageRandom extends StatefulWidget {
 
 class _AlbumPageRandomState extends State<AlbumPageRandom> {
 
-  List<int> imagesNumber = List.generate(100, (index) => index);
+  List<int> imagesNumber = List.generate(25, (index) => index);
 
   void showImage(BuildContext context, int index) {
   showDialog(
@@ -66,16 +66,6 @@ class _AlbumPageRandomState extends State<AlbumPageRandom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("My Photo Gallery", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
-        leading: InkWell(
-          onTap: () {
-            addImageDialog(context);
-          },
-          child: Icon(Icons.add_a_photo, color: Colors.white),
-          ),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
 
@@ -110,14 +100,6 @@ class _AlbumPageRandomState extends State<AlbumPageRandom> {
         
           ),
       ),
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-        NavigationDestination(icon: Icon(Icons.photo_album_outlined, size: 36,), label: "Photos"),
-        NavigationDestination(icon: Icon(Icons.refresh_outlined, size: 36,), label: "Random"),
-        NavigationDestination(icon: Icon(Icons.person_2_outlined, size: 36,), label: "About Me")
-        ]
-        )
-
     );
       
   }

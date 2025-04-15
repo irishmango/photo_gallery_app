@@ -12,16 +12,13 @@ ThemeData appTheme = ThemeData(
     ),
     iconTheme: IconThemeData(color: Colors.white),
   ),
-  navigationBarTheme: const NavigationBarThemeData(
-  backgroundColor: Color(0xFF252525),
-  indicatorColor: Color(0xFF4D4D4D), 
-  labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-  elevation: 0,
-  iconTheme: WidgetStatePropertyAll(
-    IconThemeData(color: Colors.white),
+  textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.white)),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color(0xFF3B3B3B),
+    selectedItemColor: Colors.white,
+    unselectedItemColor: Colors.grey,
+    selectedLabelStyle: TextStyle(color: Colors.white),
+    unselectedLabelStyle: TextStyle(color: Colors.grey),
+    elevation: 0,
   ),
-  labelTextStyle: WidgetStatePropertyAll(
-    TextStyle(color: Colors.white),
-  ),
-),
-  );
+);

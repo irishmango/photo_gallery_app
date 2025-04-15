@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_gallery_app/gallery_data.dart';
+import 'package:photo_gallery_app/photo_detail_page.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({super.key});
@@ -10,29 +11,58 @@ class AlbumPage extends StatefulWidget {
 
 class _AlbumPageState extends State<AlbumPage> {
 
-  void showImage(BuildContext context, int index) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Center(
-              child: Hero(
-                tag: 'image_$index',
-                child: Image.asset(
-                  galleryData[index].imagePath,
-                  fit: BoxFit.contain,
-                ),
-              ),
+  void showImage(BuildContext context, int startIndex) {
+  final PageController pageController = PageController(
+    initialPage: startIndex,
+    viewportFraction: 0.85,
+  );
+
+  showDialog(
+    context: context,
+    barrierDismissible: true, // tap outside to dismiss
+    builder: (_) {
+      return GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.of(context).pop(), // dismiss on outside tap
+        child: Container(
+          color: Colors.black.withAlpha(50),
+          child: Center(
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: galleryData.length,
+              itemBuilder: (context, index) {
+                final item = galleryData[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Hero(
+                    tag: 'image_$index',
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop(); 
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => PhotoDetailPage(item: item, index: index),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          item.imagePath,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
   void addImageDialog(BuildContext context) {
     showDialog(
@@ -49,38 +79,39 @@ class _AlbumPageState extends State<AlbumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Photo Gallery",),
-        leading: InkWell(
-          onTap: () {
-            addImageDialog(context);
-          },
-          child: const Icon(Icons.add_a_photo, color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: ListView.builder(
+
+        child: GridView.builder(
           itemCount: galleryData.length,
-          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 5,
-          // ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4), 
           itemBuilder: (context, index) {
-            return Image.asset('assets/ceol/ceol_nemo.png', filterQuality: FilterQuality.high,);
-          },
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: InkWell(
+                child: Hero(
+                  tag: 'image_$index',
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(galleryData[index].imagePath),
+                        fit: BoxFit.cover,
+                        colorFilter: null
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  showImage(context, index);
+                },
+               )   
+               );
+          }
+            )
         ),
-      ),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(
-              icon: Icon(Icons.photo_album_outlined, color: Colors.white, size: 36), label: "Photos"), 
-          NavigationDestination(
-              icon: Icon(Icons.refresh_outlined, color: Colors.white, size: 36), label: "Random"),
-          NavigationDestination(
-              icon: Icon(Icons.person_2_outlined, color: Colors.white, size: 36), label: "About Me",),
-        ],
-      ),
     );
   }
 }

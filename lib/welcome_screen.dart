@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_gallery_app/album_page.dart';
+import 'package:photo_gallery_app/home_screen.dart';
 
 // 
 class WelcomeScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
       onVerticalDragUpdate: (details) {
         if (details.delta.dy < -10) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const AlbumPage()),
+            MaterialPageRoute(builder: (_) => const HomeScreen()),
           );
         }
       },
