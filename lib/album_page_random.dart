@@ -37,30 +37,6 @@ class _AlbumPageRandomState extends State<AlbumPageRandom> {
   );
 }
 
-  void addImageDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) {
-        return AlertDialog(
-          title: Center(child: const Text("Add a new image?")),
-          actions: [
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    imagesNumber.add(imagesNumber.length);
-                  });
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Add", style: TextStyle(fontSize: 16, color: Colors.blue),),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
  
 
   @override

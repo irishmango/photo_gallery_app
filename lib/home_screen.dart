@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_gallery_app/about_me_page.dart';
 import 'package:photo_gallery_app/album_page.dart';
 import 'package:photo_gallery_app/album_page_random.dart';
-import 'package:photo_gallery_app/gallery_data.dart';
-import 'package:photo_gallery_app/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,45 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int selectedIndex = 0;
 
-  void showImage(BuildContext context, int startIndex) {
-  final PageController pageController = PageController(
-    initialPage: startIndex,
-    viewportFraction: 0.85, 
-  );
-  showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (_) {
-      return GestureDetector(
-        onTap: () => Navigator.of(context).pop(),
-        child: Container(
-          color: Colors.black.withAlpha(50),
-          child: Center(
-            child: PageView.builder(
-              controller: pageController,
-              itemCount: galleryData.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Hero(
-                    tag: 'image_$index',
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Image.asset(
-                        galleryData[index].imagePath,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-      );
-    },
-  );
-}
 
   void addImageDialog(BuildContext context) {
     showDialog(
@@ -69,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             Center(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 child: const Text("Dismiss", style: TextStyle(fontSize: 16, color: Colors.blue),),
               ),
             ),

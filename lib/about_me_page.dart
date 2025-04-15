@@ -33,7 +33,7 @@ class AboutMePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: const Color.fromARGB(255, 95, 93, 93), // or any color you like
+                            color: const Color.fromARGB(255, 95, 93, 93), 
                             width: 4.0,
                           ),
                         ),
@@ -44,7 +44,7 @@ class AboutMePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    // Text below the avatar
+                  
 
                     const Text("Shokri Francis Raoof",
                       textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class AboutMePage extends StatelessWidget {
                     style: TextStyle(fontSize: 12),),
                       SizedBox(height: 8,),
                     const Text(
-                      'Shokri is an irish guy living in Berlin currently learning how to code in Dart/Flutter. He is developing an app to help people learn music theory and also a Pokédex. He also has a little 1 year old mini dachshund named Ceol("Music" in Irish)',
+                      'I am an irish guy living in Berlin for the past 10 years now learning how to code in Dart/Flutter. Currently developing an app to help people learn music theory and also a Pokédex. I also have a little 1 year old mini dachshund named Ceol("Music" in Irish)',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),

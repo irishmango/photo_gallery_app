@@ -12,69 +12,62 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> {
 
   void showImage(BuildContext context, int startIndex) {
-  final PageController pageController = PageController(
+  final pageController = PageController(
     initialPage: startIndex,
     viewportFraction: 0.85,
   );
 
   showDialog(
     context: context,
-    barrierDismissible: true, // tap outside to dismiss
-    builder: (_) {
-      return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => Navigator.of(context).pop(), // dismiss on outside tap
-        child: Container(
-          color: Colors.black.withAlpha(50),
-          child: Center(
-            child: PageView.builder(
-              controller: pageController,
-              itemCount: galleryData.length,
-              itemBuilder: (context, index) {
-                final item = galleryData[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Hero(
-                    tag: 'image_$index',
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop(); 
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => PhotoDetailPage(item: item, index: index),
+    barrierDismissible: true,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.zero,
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: GestureDetector(
+                onTap: () {}, 
+                child: SizedBox(
+                  height: 400, 
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: galleryData.length,
+                    itemBuilder: (context, index) {
+                      final item = galleryData[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Hero(
+                          tag: 'image_$index',
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: GestureDetector(
+                              onTap: () {
+                                  Navigator.of(context).pop(); 
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => PhotoDetailPage(item: item, index: index),
+                                    ),
+                                  );
+                                },
+                              child: Image.asset(
+                                item.imagePath,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          item.imagePath,
-                          fit: BoxFit.contain,
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              ),
           ),
-        ),
       );
     },
   );
 }
 
-  void addImageDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) {
-        return const AlertDialog(
-          content: Text("Placeholder for adding an image."),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

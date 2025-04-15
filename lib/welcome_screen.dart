@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photo_gallery_app/album_page.dart';
 import 'package:photo_gallery_app/home_screen.dart';
 
 // 
@@ -27,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   const SizedBox(), 
                   const Text(
-                    "Welcome",
+                    "Welcome!",
                     style: TextStyle(
                       fontSize: 36,
                       color: Colors.white,

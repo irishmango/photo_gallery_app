@@ -74,7 +74,7 @@ List<GalleryItem> galleryData = [
     imageTitle: 'Puppy in Bark',
     imageDate: '10.01.2025',
     imageDescription: 'A playful pup exploring the bark.',
-    imagePath: 'assets/img/puppy_in_bark.jpg',
+    imagePath: 'assets/img/puppy_in_park.jpg',
   ),
   GalleryItem(
     imageTitle: 'Park Puppy 2',

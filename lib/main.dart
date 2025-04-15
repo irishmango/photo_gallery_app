@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photo_gallery_app/album_page.dart';
-import 'package:photo_gallery_app/home_screen.dart';
 import 'package:photo_gallery_app/theme.dart';
 import 'package:photo_gallery_app/welcome_screen.dart';
 
