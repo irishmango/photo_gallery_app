@@ -16,7 +16,6 @@ class _AlbumPageState extends State<AlbumPage> {
     initialPage: startIndex,
     viewportFraction: 0.85,
   );
-
   showDialog(
     context: context,
     barrierDismissible: true,

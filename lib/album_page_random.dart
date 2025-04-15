@@ -11,32 +11,45 @@ class _AlbumPageRandomState extends State<AlbumPageRandom> {
 
   List<int> imagesNumber = List.generate(25, (index) => index);
 
-  void showImage(BuildContext context, int index) {
+  void showImage(BuildContext context, int startIndex) {
+  final pageController = PageController(
+    initialPage: startIndex,
+    viewportFraction: 0.85,
+  );
   showDialog(
     context: context,
-    barrierDismissible: true, 
-    builder: (_) {
-      return GestureDetector(
-        onTap: () => Navigator.of(context).pop(), 
-        child: Container(
-          color: Colors.black.withAlpha(85), 
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Center(
-              child: Hero(
-                tag: 'image_$index',
-                  child: Image.network('https://picsum.photos/id/$index/800/600',
-                  fit: BoxFit.contain,
+    barrierDismissible: true,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.zero,
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: GestureDetector(
+                onTap: () {}, 
+                child: SizedBox(
+                  height: 400, 
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: imagesNumber.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Hero(
+                          tag: 'image_$index',
+                          child: Image.network('https://picsum.photos/id/$index/800/600')
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
           ),
-        ),
       );
     },
   );
 }
-
+  
  
 
   @override
