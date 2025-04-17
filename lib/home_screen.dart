@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<int> imagesNumber = List.generate(25, (index) => index);
 
   List<Widget> screens = [AlbumPage(), AlbumPageRandom(), AboutMePage(),
   ];
@@ -40,6 +41,38 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void addRandomImageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) {
+        return AlertDialog(
+          title: Center(child: const Text("Add another image?")),
+          actions: [
+            Center(
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      imagesNumber.length++;
+                    },
+                    child: const Text("Yes", style: TextStyle(fontSize: 16, color: Colors.blue),),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Dismiss", style: TextStyle(fontSize: 16, color: Colors.blue),),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   String getAppBarTitle(int index) {
   switch (index) {
     case 0:
@@ -61,8 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: selectedIndex == 0 || selectedIndex == 1
           ? InkWell(
           onTap: () {
-
-            addImageDialog(context);
+            selectedIndex == 0 
+            ? addImageDialog(context)
+            : addRandomImageDialog(context)
+            ;
           },
           child: const Icon(Icons.add_a_photo, color: Colors.white),
         )

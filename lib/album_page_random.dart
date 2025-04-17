@@ -16,39 +16,40 @@ class _AlbumPageRandomState extends State<AlbumPageRandom> {
     initialPage: startIndex,
     viewportFraction: 0.85,
   );
-  showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (context) {
-      return Dialog(
-        backgroundColor: Colors.transparent,
-        insetPadding: EdgeInsets.zero,
-        child: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
           child: GestureDetector(
-                onTap: () {}, 
-                child: SizedBox(
-                  height: 400, 
-                  child: PageView.builder(
-                    controller: pageController,
-                    itemCount: imagesNumber.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Hero(
-                          tag: 'image_$index',
-                          child: Image.network('https://picsum.photos/id/$index/800/600')
-                        ),
-                      );
-                    },
+            onTap: () => Navigator.of(context).pop(),
+            child: GestureDetector(
+                  onTap: () {}, 
+                  child: SizedBox(
+                    height: 400, 
+                    child: PageView.builder(
+                      controller: pageController,
+                      itemCount: imagesNumber.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Hero(
+                            tag: 'image_$index',
+                            child: Image.network('https://picsum.photos/id/$index/800/600')
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-          ),
-      );
-    },
-  );
-}
+            ),
+        );
+      },
+    );
+  }
+
   
  
 
